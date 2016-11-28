@@ -18,7 +18,6 @@
 		<p>
 		<c:set var = "pageURL" value="index.jsp" scope = "session" />
 		<jsp:include page="footer.jsp" />
-		<c:out value="${sessionScope.local}"></c:out>
 		
 	</body>
 </html>

@@ -28,20 +28,19 @@ public class SQLUserDAO implements UserDAO{
 			
 			ResultSet result = statement.executeQuery(query);
 			
-			result.next();
-			if (result.getString("Password") != null){
+			if(result.next()){
 				if (result.getString("Password").equals(password)){
-				user.setLogin(result.getString("Login"));
-				user.setName(result.getString("Name"));
-				user.setSurname(result.getString("Surname"));
-				user.setPosition(result.getString("Position"));
+					user.setLogin(result.getString("Login"));
+					user.setName(result.getString("Name"));
+					user.setSurname(result.getString("Surname"));
+					user.setPosition(result.getString("Position"));
 				} else {
 					user.setErrorStatus(true);
 					user.setErrorMessage("Wrong password");
 				}
 			} else {
 				user.setErrorStatus(true);
-				user.setErrorMessage("Wrong login");
+				user.setErrorMessage("Wrong password");
 			}
 			
 			

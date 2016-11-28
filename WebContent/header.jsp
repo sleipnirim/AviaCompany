@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 <body>
-	<c:if test="${not (sessionScope.user eq null)}">
+	<c:if test="${not (sessionScope.user eq null) and not (sessionScopeUser.errorStatus)}">
 		<c:out value="${user.name}"></c:out>
 		<form action="Controller">
 			<input type="hidden" name="command" value="toPersonalPage">

@@ -16,7 +16,6 @@
 		<br>
 		<br>
 		<br>
-		<c:out value="${localeSetMessage}" />
 		<p>
 		<table><tr><td>
 		<form action="Controller" method="post">
