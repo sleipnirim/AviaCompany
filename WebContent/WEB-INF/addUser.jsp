@@ -36,6 +36,17 @@
 		<tr><td><input type="submit" value="${submitLoginButton}">
 	</form></td></tr>
 </table>
+<c:choose>
+	<c:when test="${requestScope.addStatus eq 1}">
+		<c:out value="${DBError}" />
+	</c:when>
+	<c:when test="${requestScope.addStatus eq 2}">
+		<c:out value="${complData}" />
+	</c:when>
+	<c:when test="${requestScope.addStatus eq 3}">
+		<c:out value="${addSuccess}" />
+	</c:when>
+</c:choose>
 <c:set var="pageURL" value="WEB-INF/addUser.jsp" />
 <jsp:include page="/footer.jsp" />
 </body>

@@ -10,6 +10,7 @@ import by.htp6.bean.User;
 import by.htp6.command.Command;
 import by.htp6.service.ServiceFactory;
 import by.htp6.service.UserService;
+import by.htp6.service.exception.ServiceException;
 
 public class AddUser implements Command{
 
@@ -22,14 +23,25 @@ public class AddUser implements Command{
 		user.setPosition(request.getParameter("position"));
 		String password = request.getParameter("password");
 		
-		ServiceFactory factory = ServiceFactory.getInstance();
-		UserService service = factory.getUserService();
-		service.addUser(user, password);
+		if(user.getLogin() != "" & user.getName() != "" & user.getPosition() != "" &
+				user.getSurname() != "" & password != ""){
+			ServiceFactory factory = ServiceFactory.getInstance();
+			UserService service = factory.getUserService();
+			try {
+				service.addUser(user, password);
+			} catch (ServiceException e) {
+				request.setAttribute("addStatus", "1");
+				e.printStackTrace();
+			} 
+		} else {
+				request.setAttribute("addStatus", "2");
+			}	
+		
+		if(request.getAttribute("addStatus") == null){
+			request.setAttribute("addStatus", "3");
+		}
 		
 		request.getRequestDispatcher("WEB-INF/addUser.jsp").forward(request, response);
 		
 	}
-	
-	
-
 }

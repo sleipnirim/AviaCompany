@@ -19,8 +19,8 @@
 		<tr><td><input type="submit" value="${submitLoginButton}"> 
 	</form></td></tr></table>
 	<jsp:useBean id="user" class="by.htp6.bean.User" />
-	<c:if test="${requestScope.user.errorStatus}">
-		<c:out value="${requestScope.user.errorMessage}"></c:out>
+	<c:if test="${sessionScope.user.errorStatus}">
+		<c:out value="${sessionScope.user.errorMessage}"></c:out>
 	</c:if>
 	<c:set var = "pageURL" value="login.jsp" scope = "session" />
 		<jsp:include page="footer.jsp" />

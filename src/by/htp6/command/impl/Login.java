@@ -28,7 +28,6 @@ public class Login implements Command{
 		ServiceFactory factory = ServiceFactory.getInstance();
 		UserService service = factory.getUserService();
 		user = service.login(login, password);
-		System.out.println(user.getErrorMessage()+user.getLogin()+user.getName()+user.getPosition()+user.getSurname()+user.isErrorStatus());
 		
 		request.getSession(true).setAttribute("user", user);
 		

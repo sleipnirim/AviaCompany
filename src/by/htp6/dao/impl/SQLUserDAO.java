@@ -9,6 +9,7 @@ import java.sql.Statement;
 import by.htp6.bean.PositionsEnum;
 import by.htp6.bean.User;
 import by.htp6.dao.UserDAO;
+import by.htp6.dao.exception.DAOException;
 import by.htp6.dao.sql.SQLConnection;
 
 
@@ -28,7 +29,8 @@ public class SQLUserDAO implements UserDAO{
 			
 			ResultSet result = statement.executeQuery(query);
 			
-			if(result.next()){
+			if(result.isBeforeFirst()){
+				result.next();
 				if (result.getString("Password").equals(password)){
 					user.setLogin(result.getString("Login"));
 					user.setName(result.getString("Name"));
@@ -40,21 +42,13 @@ public class SQLUserDAO implements UserDAO{
 				}
 			} else {
 				user.setErrorStatus(true);
-				user.setErrorMessage("Wrong password");
+				user.setErrorMessage("Wrong login");
 			}
 			
 			
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			user.setErrorStatus(true);
+			user.setErrorMessage("${DBError}");
 			e.printStackTrace();
 		} finally {
 			if (conn != null)
@@ -70,7 +64,7 @@ public class SQLUserDAO implements UserDAO{
 	}
 
 	@Override
-	public void addUser(User user, String password) {
+	public void addUser(User user, String password) throws DAOException {
 		
 		Connection conn = null;
 		
@@ -105,16 +99,11 @@ public class SQLUserDAO implements UserDAO{
 		
 		try {
 			conn = SQLConnection.getConnection();
-			
 			conn.createStatement().executeUpdate(query);
 			
 		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
-			
 			e.printStackTrace();
+			throw new DAOException();
 		}
-		
 	}
-	
-
-
 }

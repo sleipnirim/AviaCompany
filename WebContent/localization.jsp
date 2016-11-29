@@ -27,5 +27,8 @@
 <fmt:message bundle="${loc}" key="local.askSurname" var="askSurname" scope="session"/>
 <fmt:message bundle="${loc}" key="local.askPosition" var="askPosition" scope="session"/>
 <fmt:message bundle="${loc}" key="local.selectPosition" var="selectPosition" scope="session"/>
+<fmt:message bundle="${loc}" key="local.DBError" var="DBError" scope="session"/>
+<fmt:message bundle="${loc}" key="local.complData" var="complData" scope="session"/>
+<fmt:message bundle="${loc}" key="local.addSuccess" var="addSuccess" scope="session"/>
 </body>
 </html> 
