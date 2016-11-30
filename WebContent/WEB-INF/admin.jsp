@@ -21,6 +21,10 @@
 			<input type="hidden" name="redirURL" value="WEB-INF/addUser.jsp">
 			<input type="submit" value="${addUser}">
 		</form>
+		<form action="Controller">
+			<input type="hidden" name="command" value="getUsers">
+			<input type="submit" value="${allUsers}">
+		</form>
 		<c:set var = "pageURL" value="WEB-INF/admin.jsp" scope = "session" />
 		<jsp:include page="/footer.jsp" />
 	</body>

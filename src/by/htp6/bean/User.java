@@ -11,6 +11,7 @@ public class User implements Serializable{
 	private String position;
 	private boolean errorStatus;
 	private String errorMessage;
+	private int id;
 	
 	
 
@@ -58,6 +59,14 @@ public class User implements Serializable{
 		this.position = position;
 	}
 	
+	public int getId(){
+		return id;
+	}
+	
+	public void setId(int id){
+		this.id = id;
+	}
+	
 	public boolean equals (Object obj){
 		if (this == obj) return true;
 		if (obj == null) return false;
@@ -78,13 +87,17 @@ public class User implements Serializable{
 		result = prime*result + name.hashCode();
 		result = prime*result + surname.hashCode();
 		result = prime*result + position.hashCode();
+		result = prime*result + errorMessage.hashCode();
+		result = prime*result + id;
 		
 		return result;
 	}
 	
 	public String toString(){
 		
-		return "User (name = " + name + ", surname = " + surname + ", login = " + login + ", position = " + position + ".";
+		return "User (name = " + name + ", surname = " + surname + ","
+				+ " login = " + login + ", position = " + position +  ", errorMessage = " 
+				+ errorMessage + " errorStatus = " + errorStatus + ", id = " + id + ".";
 	}
 
 }

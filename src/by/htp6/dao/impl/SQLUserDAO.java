@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import by.htp6.bean.PositionsEnum;
 import by.htp6.bean.User;
@@ -14,6 +16,8 @@ import by.htp6.dao.sql.SQLConnection;
 
 
 public class SQLUserDAO implements UserDAO{
+	
+	
 
 	@Override
 	public User login(String login, String password) {
@@ -36,6 +40,7 @@ public class SQLUserDAO implements UserDAO{
 					user.setName(result.getString("Name"));
 					user.setSurname(result.getString("Surname"));
 					user.setPosition(result.getString("Position"));
+					user.setId(result.getInt("id"));
 				} else {
 					user.setErrorStatus(true);
 					user.setErrorMessage("Wrong password");
@@ -105,5 +110,60 @@ public class SQLUserDAO implements UserDAO{
 			e.printStackTrace();
 			throw new DAOException();
 		}
+	}
+
+	@Override
+	public List<User> getUsers() throws DAOException {
+		
+		Connection conn = null;
+		List<User> users = new ArrayList<User>();
+		String query = "SELECT * FROM Employees LEFT JOIN Positions ON Positions.id = Employees.Positions_id;";
+		
+		try {
+			conn = SQLConnection.getConnection();
+			Statement st = conn.createStatement();
+			ResultSet result = st.executeQuery(query);
+			
+			while(result.next()){
+				User user = new User();
+				user.setLogin(result.getString("Login"));
+				user.setName(result.getString("Name"));
+				user.setSurname(result.getString("Surname"));
+				user.setPosition(result.getString("Position"));
+				user.setId(result.getInt("id"));
+				users.add(user);
+			}
+			
+			
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			throw new DAOException();
+		}
+		
+		return users;
+	}
+
+	@Override
+	public void deleteUser(String id) throws DAOException {
+		Connection conn = null;
+		String query = "DELETE FROM Employees WHERE id = '" + id + "';";
+		
+		try {
+			conn = SQLConnection.getConnection();
+			Statement st = conn.createStatement();
+			st.executeUpdate(query);
+			
+		} catch (InstantiationException | IllegalAccessException | ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			throw new DAOException();
+		}
+		
+		
+	}
+
+	@Override
+	public User editUser(String id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

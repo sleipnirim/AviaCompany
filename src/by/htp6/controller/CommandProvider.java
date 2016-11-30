@@ -5,6 +5,9 @@ import java.util.Map;
 
 import by.htp6.command.Command;
 import by.htp6.command.impl.AddUser;
+import by.htp6.command.impl.DeleteUser;
+import by.htp6.command.impl.EditUser;
+import by.htp6.command.impl.GetUsers;
 import by.htp6.command.impl.Login;
 import by.htp6.command.impl.Logout;
 import by.htp6.command.impl.Redirect;
@@ -24,6 +27,9 @@ public class CommandProvider {
 		commands.put("logout", new Logout());
 		commands.put("addUser", new AddUser());
 		commands.put("redir", new Redirect());
+		commands.put("getUsers", new GetUsers());
+		commands.put("editUser", new EditUser());
+		commands.put("deleteUser", new DeleteUser());
 	}
 	
 	public static Command getCommand(String commandName){

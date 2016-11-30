@@ -30,5 +30,9 @@
 <fmt:message bundle="${loc}" key="local.DBError" var="DBError" scope="session"/>
 <fmt:message bundle="${loc}" key="local.complData" var="complData" scope="session"/>
 <fmt:message bundle="${loc}" key="local.addSuccess" var="addSuccess" scope="session"/>
+<fmt:message bundle="${loc}" key="local.allUsers" var="allUsers" scope="session"/>
+<fmt:message bundle="${loc}" key="local.edit" var="edit" scope="session"/>
+<fmt:message bundle="${loc}" key="local.delete" var="delete" scope="session"/>
+
 </body>
 </html> 
